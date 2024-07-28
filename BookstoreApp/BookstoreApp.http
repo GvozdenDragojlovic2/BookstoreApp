@@ -1,0 +1,35 @@
+@BookstoreApp_HostAddress = https://localhost:7288
+
+GET {{BookstoreApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+GET {{BookstoreApp_HostAddress}}/api/bookstore
+
+###
+
+GET {{BookstoreApp_HostAddress}}/authors
+
+###
+
+POST {{BookstoreApp_HostAddress}}/authors
+Content-Type: application/json
+
+{
+  //Author
+}
+
+###
+
+DELETE {{BookstoreApp_HostAddress}}/authors
+
+###
+
+GET {{BookstoreApp_HostAddress}}/authors
+
+###
+
+GET {{BookstoreApp_HostAddress}}/books
+
+###
