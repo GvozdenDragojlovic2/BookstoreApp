@@ -1,5 +1,6 @@
 ﻿using BookstoreApp.Data;
 using BookstoreApp.Entities;
+using BookstoreApp.ListPagination;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,12 +20,21 @@ namespace BookstoreApp.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Book>>> GetAllBooks()
+        public async Task<ActionResult<List<Book>>> GetAllBooks(int page = 1, float pageSize = 10f)
         {
 
-            var books = await _dataContext.Books.ToListAsync();
+            var pageCount = Math.Ceiling(_dataContext.Books.Count() / pageSize);
 
-            return Ok(books);
+            var books = await _dataContext.Books.Skip((page - 1) * (int)pageSize).Take((int)pageSize).ToListAsync();
+
+            var pagination = new BookPagination
+            {
+                Books = books,
+                page = page,
+                totalPages = (int)pageCount
+            };
+
+            return Ok(pagination);
         }
 
         [HttpGet("{id:guid}")]
