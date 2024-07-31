@@ -4,6 +4,7 @@ using BookstoreApp.ListPagination;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace BookstoreApp.Controllers
 {
@@ -34,6 +35,7 @@ namespace BookstoreApp.Controllers
                 totalPages = (int)pageCount
             };
 
+            //Log.Information("Information about authors => {@result}", pagination);
 
             return Ok(pagination);
         }
@@ -47,6 +49,8 @@ namespace BookstoreApp.Controllers
             {
                 return NotFound("Author not found");
             }
+
+            Log.Information("Information about author => {@result}", author);
 
             return Ok(author);
         }

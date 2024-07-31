@@ -4,6 +4,7 @@ using BookstoreApp.ListPagination;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace BookstoreApp.Controllers
 {
@@ -46,6 +47,8 @@ namespace BookstoreApp.Controllers
             {
                 return NotFound("Book not found");
             }
+
+            Log.Information("Information about Book => {@result}", book);
 
             return Ok(book);
         }
